@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_cash_financial">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <style>
+                    .ancho_uno {
+                    width: 10%,
+                    text-align: center
+                    }
+                    .ancho_dos {
+                    width: 73%
+                    }
+                    .ancho_tres {
+                    width: 17%
+                    }
+                    .detalle {
+                    font-size: 12px;
+                    color: #bcbcbc;
+                    }
+
+                </style>
+                <t t-foreach="data['pages']" t-as="d">
+                    <div class="page" style="margin-top: -45px !important;">
+                        <h2 class="text-center">
+                            <span>Reporte de Caja</span>
+                        </h2>
+                       <div class="row">
+                            <div class="col-8">
+                                 <h6>
+                                    <span>Usuario :</span>
+                                    <t t-esc="data['usuario']"/>
+                                </h6>
+                                <h6>
+                                    <span>Datos recogidos :
+                                        <t t-esc="data['fechas']"/>
+                                    </span>
+                                </h6>
+                            </div>
+                            <div class="col-4">
+                               <h6>
+                                    <span>Fecha :</span>
+                                    <t t-esc="data['fecha_hoy']"/>
+                                </h6>
+                            </div>
+                        </div>
+                        <br/>
+                        <tbody>
+                            <p class="text-center">
+                                <strong>******** Detalle total pagado por : ********</strong>
+                            </p>
+                            <table class="table table-sm table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th colspan="3" class="text-center">
+                                            <strong>Tipos de Patente</strong>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th class="ancho_uno">#</th>
+                                        <th class="ancho_dos">Tipo Patente</th>
+                                        <th class="text-right ancho_tres">Monto</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Regimen Tradicional</td>
+                                        <td class="text-right">₡
+                                            <span t-esc="'{0:,.2f}'.format(round(data['tipos_patentes']['rt_amount'],2))"/>
+                                        </td>
+                                    </tr>
+                                     <t t-if="data['tipos_patentes']['rt_periods']">
+                                        <t t-foreach="data['tipos_patentes']['rt_periods']" t-as="rt">
+                                            <tr class="detalle">
+                                                <td></td>
+                                                <td>
+                                                    Pago correspondiente a período  <t t-esc="rt['year']"/>
+                                                </td>
+                                                <td class="text-right">₡
+                                                    <span t-esc="'{0:,.2f}'.format(round(rt['amount'],2))"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Regimen Simplificado</td>
+                                        <td class="text-right">₡
+                                            <span t-esc="'{0:,.2f}'.format(round(data['tipos_patentes']['rs_amount'],2))"/>
+                                        </td>
+                                    </tr>
+                                     <t t-if="data['tipos_patentes']['rs_periods']">
+                                        <t t-foreach="data['tipos_patentes']['rs_periods']" t-as="rs">
+                                            <tr class="detalle">
+                                                <td></td>
+                                                <td>
+                                                    Pago correspondiente a período  <t t-esc="rs['year']"/>
+                                                </td>
+                                                <td class="text-right">₡
+                                                    <span t-esc="'{0:,.2f}'.format(round(rs['amount'],2))"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Emprendedores</td>
+                                        <td class="text-right">₡
+                                            <span t-esc="'{0:,.2f}'.format(round(data['tipos_patentes']['em_amount'],2))"/>
+                                        </td>
+                                    </tr>
+                                      <t t-if="data['tipos_patentes']['em_periods']">
+                                        <t t-foreach="data['tipos_patentes']['em_periods']" t-as="em">
+                                            <tr class="detalle">
+                                                <td></td>
+                                                <td>
+                                                    Pago correspondiente a período  <t t-esc="em['year']"/>
+                                                </td>
+                                                <td class="text-right">₡
+                                                    <span t-esc="'{0:,.2f}'.format(round(em['amount'],2))"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Precario</td>
+                                        <td class="text-right">₡
+                                            <span t-esc="'{0:,.2f}'.format(round(data['tipos_patentes']['pr_amount'],2))"/>
+                                        </td>
+                                    </tr>
+                                     <t t-if="data['tipos_patentes']['pr_periods']">
+                                        <t t-foreach="data['tipos_patentes']['pr_periods']" t-as="pr">
+                                            <tr class="detalle">
+                                                <td></td>
+                                                <td>
+                                                    Pago correspondiente a período  <t t-esc="pr['year']"/>
+                                                </td>
+                                                <td class="text-right">₡
+                                                    <span t-esc="'{0:,.2f}'.format(round(pr['amount'],2))"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Licores</td>
+                                        <td class="text-right">₡
+                                            <span t-esc="'{0:,.2f}'.format(round(data['tipos_patentes']['lc_amount'],2))"/>
+                                        </td>
+                                    </tr>
+                                     <t t-if="data['tipos_patentes']['lc_periods']">
+                                        <t t-foreach="data['tipos_patentes']['lc_periods']" t-as="lc">
+                                            <tr class="detalle">
+                                                <td></td>
+                                                <td>
+                                                    Pago correspondiente a período  <t t-esc="lc['year']"/>
+                                                </td>
+                                                <td class="text-right">₡
+                                                    <span t-esc="'{0:,.2f}'.format(round(lc['amount'],2))"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>Temporales</td>
+                                        <td class="text-right">₡
+                                            <span t-esc="'{0:,.2f}'.format(round(data['tipos_patentes']['tm_amount'],2))"/>
+                                        </td>
+                                    </tr>
+                                    <t t-if="data['tipos_patentes']['tm_periods']">
+                                        <t t-foreach="data['tipos_patentes']['tm_periods']" t-as="tm">
+                                            <tr class="detalle">
+                                                <td></td>
+                                                <td>
+                                                    Pago correspondiente a período  <t t-esc="tm['year']"/>
+                                                </td>
+                                                <td class="text-right">₡
+                                                    <span t-esc="'{0:,.2f}'.format(round(tm['amount'],2))"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2" class="text-center">
+                                            <span>Total:</span>
+                                        </td>
+                                        <td class="text-right">
+                                            <strong>₡
+                                                <span t-esc="'{0:,.2f}'.format(round(data['tipos_patentes']['totals'],2))"/>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+                            <table class="table table-sm table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th colspan="3" class="text-center">
+                                            <strong>Trimestres y/o Trimbres</strong>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th class="ancho_uno">#</th>
+                                        <th class="ancho_dos">Descripción</th>
+                                        <th class="text-right ancho_tres">Monto</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Trimestre 1</td>
+                                        <td class="text-right">₡
+                                            <span t-esc="'{0:,.2f}'.format(round(data['trimestres']['t1_amount'],2))"/>
+                                        </td>
+                                    </tr>
+                                    <t t-if="data['trimestres']['t1_periods']">
+                                        <t t-foreach="data['trimestres']['t1_periods']" t-as="p1">
+                                            <tr class="detalle">
+                                                <td></td>
+                                                <td>
+                                                    Pago correspondiente a período  <t t-esc="p1['year']"/>
+                                                </td>
+                                                <td class="text-right">₡
+                                                    <span t-esc="'{0:,.2f}'.format(round(p1['amount'],2))"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Trimestre 2</td>
+                                        <td class="text-right">₡
+                                            <span t-esc="'{0:,.2f}'.format(round(data['trimestres']['t2_amount'],2))"/>
+                                        </td>
+                                    </tr>
+                                    <t t-if="data['trimestres']['t2_periods']">
+                                        <t t-foreach="data['trimestres']['t2_periods']" t-as="p2">
+                                            <tr class="detalle">
+                                                <td></td>
+                                                <td>
+                                                    Pago correspondiente a período  <t t-esc="p2['year']"/>
+                                                </td>
+                                                 <td class="text-right">₡
+                                                    <span t-esc="'{0:,.2f}'.format(round(p2['amount'],2))"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Trimestre 3</td>
+                                        <td class="text-right">₡
+                                            <span t-esc="'{0:,.2f}'.format(round(data['trimestres']['t3_amount'],2))"/>
+                                        </td>
+                                    </tr>
+                                    <t t-if="data['trimestres']['t3_periods']">
+                                        <t t-foreach="data['trimestres']['t3_periods']" t-as="p3">
+                                            <tr class="detalle">
+                                                <td></td>
+                                                <td>
+                                                   Pago correspondiente a período  <t t-esc="p3['year']"/>
+                                                </td>
+                                                 <td class="text-right">₡
+                                                    <span t-esc="'{0:,.2f}'.format(round(p3['amount'],2))"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Trimestre 4</td>
+                                        <td class="text-right">₡
+                                            <span t-esc="'{0:,.2f}'.format(round(data['trimestres']['t4_amount'],2))"/>
+                                        </td>
+                                    </tr>
+                                    <t t-if="data['trimestres']['t4_periods']">
+                                        <t t-foreach="data['trimestres']['t4_periods']" t-as="p4">
+                                            <tr class="detalle">
+                                                <td></td>
+                                                <td>
+                                                    Pago correspondiente a período  <t t-esc="p4['year']"/>
+                                                </td>
+                                                 <td class="text-right">₡
+                                                    <span t-esc="'{0:,.2f}'.format(round(p4['amount'],2))"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Timbre</td>
+                                        <td class="text-right">₡
+                                            <span t-esc="'{0:,.2f}'.format(round(data['trimestres']['timbre'],2))"/>
+                                        </td>
+                                    </tr>
+                                    <t t-if="data['trimestres']['timbre_periods']">
+                                        <t t-foreach="data['trimestres']['timbre_periods']" t-as="t">
+                                            <tr class="detalle">
+                                                <td></td>
+                                                <td>
+                                                   Pago correspondiente a período  <t t-esc="t['year']"/>
+                                                </td>
+                                                 <td class="text-right">₡
+                                                    <span t-esc="'{0:,.2f}'.format(round(t['amount'],2))"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>Timbre licor</td>
+                                        <td class="text-right">₡
+                                            <span t-esc="'{0:,.2f}'.format(round(data['trimestres']['timbre_licor'],2))"/>
+                                        </td>
+                                    </tr>
+                                    <t t-if="data['trimestres']['timbre_licor_periods']">
+                                        <t t-foreach="data['trimestres']['timbre_licor_periods']" t-as="tl">
+                                            <tr class="detalle">
+                                                <td></td>
+                                                <td>
+                                                   Pago correspondiente a período  <t t-esc="tl['year']"/>
+                                                </td>
+                                                 <td class="text-right">₡
+                                                    <span t-esc="'{0:,.2f}'.format(round(tl['amount'],2))"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2" class="text-center">
+                                            <span>Total:</span>
+                                        </td>
+                                        <td class="text-right">
+                                            <strong>₡
+                                                <t t-esc="'{0:,.2f}'.format(round(data['trimestres']['totals'],2))"/>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+                            <!--   <table class="table table-sm table-bordered">
+                                   <thead>
+                                       <tr>
+                                           <th colspan="3" class="text-center">
+                                               <strong>Formas de Pago</strong>
+                                           </th>
+                                       </tr>
+                                       <tr>
+                                           <th class="ancho_uno">#</th>
+                                           <th class="ancho_dos">Descripción</th>
+                                           <th class="text-right ancho_tres">Monto</th>
+                                       </tr>
+                                   </thead>
+                                   <tbody>
+                                       <t t-set="total_forma_pago" t-value="0"/>
+                                       <t t-foreach="data['formas_pago']" t-as="f">
+                                           <tr>
+                                               <td class="ancho_uno">
+                                                   <span t-esc="f['id']"/>
+                                               </td>
+                                               <td class="ancho_dos">
+                                                   <span t-esc="f['descripcion']"/>
+                                               </td>
+                                               <td class="text-right ancho_tres">₡
+                                                   <span t-esc="'{0:,.2f}'.format(round(f['colones'],2))"/>
+                                               </td>
+                                           </tr>
+                                           <t t-set="total_forma_pago"
+                                              t-value="round((total_forma_pago + f['colones']),2)"/>
+
+                                       </t>
+                                   </tbody>
+                                   <tfoot>
+                                       <tr>
+                                           <td colspan="2" class="text-center">
+                                               <span>Total:</span>
+                                           </td>
+                                           <td class="text-right">
+                                               <strong>₡
+                                                   <t t-esc="'{0:,.2f}'.format(total_forma_pago)"/>
+                                               </strong>
+                                           </td>
+                                       </tr>
+                                   </tfoot>
+                               </table>-->
+                            <p class="text-center">
+                                <strong>******** Totales ********</strong>
+                            </p>
+                            <t t-if="data['ocultar'] == False ">
+                                <div class="row">
+                                    <div class="col-10 text-muted text-right">
+                                        <span>TOTAL PAGADO HOY:</span>
+                                    </div>
+                                    <div class="col-2">
+                                        <span class="float-right text-right text-muted">
+                                            ₡
+                                            <t t-esc="'{0:,.2f}'.format(round(data['total_pagado_hoy'],2))"/>
+                                        </span>
+                                    </div>
+                                </div>
+                            </t>
+
+                            <div class="row">
+                                <div class="col-10 text-muted text-right">
+                                    <span>TOTAL RECAUDADO:</span>
+                                </div>
+                                <div class="col-2">
+                                    <span class="float-right text-right text-muted">
+                                        ₡
+                                        <t t-esc="'{0:,.2f}'.format(round(data['total'],2))"/>
+                                    </span>
+                                </div>
+                            </div>
+                        </tbody>
+                    </div>
+                    <p style="page-break-before:always;"></p>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

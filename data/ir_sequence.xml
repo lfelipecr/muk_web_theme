@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+     <record id="ir_sequence_solicitud_patente" model="ir.sequence">
+        <field name="name">Secuencia solicitud patente</field>
+        <field name="code">sequence.solicitud.patente</field>
+        <field name="prefix">SOLICITUD-</field>
+        <field name="implementation">no_gap</field>
+        <field name="padding">7</field>
+    </record>
+</odoo>

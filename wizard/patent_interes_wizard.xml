@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="patent_interes_wizard_form">
+            <field name="name">patent.interes.wizard.form</field>
+            <field name="model">patent.interes.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div>
+                            <h2 style="color: #13b035">
+                                <span>Patente:
+                                    <field name="patent_id"/>
+                                </span>
+                                <span class="float-right">Factura:
+                                    <field name="invoice_id"/>
+                                    <field name="currency_id" invisible="1"/>
+                                </span>
+
+                            </h2>
+                            <br/>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <span class="mr-2">Proyectar: </span><field name="check_project"/>
+                            </div>
+                            <div class="col-4">
+                                 <span class="mr-2" attrs="{'invisible': [('check_project','=',False)]}">Fecha tentativa: </span>
+                                <field name="date_interes" attrs="{'invisible': [('check_project','=',False)]}"/>
+                            </div>
+                            <div class="col-4">
+                                <button string="Calcular" name="project_interes_calculate" type="object" class="btn-link" icon="fa-location-arrow"
+                                attrs="{'invisible': [('check_project','=',False)]}"/>
+                                <button string="Limpiar" name="project_interes_re_calculate" type="object" class="btn-link" icon="fa-rotate-left"
+                                attrs="{'invisible': [('check_project','=',False)]}"/>
+                            </div>
+                            <hr/>
+                        </div>
+                        <group>
+                            <field name="invoice_line_ids" string="Resumen" readonly="1">
+                                <tree>
+                                    <field name="product_id" string="Producto"/>
+                                    <field name="name" string="Descripción"/>
+                                    <field name="trimestre" string="Trimestre"/>
+                                    <field name="dias" string="Días"/>
+                                    <field name="price_unit" string="Total"/>
+                                    <field name="interes" string="Interés"/>
+                                </tree>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <field name="amount_interes_total" string="Total" readonly="1"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="amount_patente_total" string="Total patente" readonly="1" class="text-right"/>
+                            <field name="amount_interes_total" string="Total interés" readonly="1"  class="text-right"/>
+                            <field name="amount_patente_mas_interes" string="Total patente + interés" readonly="1"  class="text-right"/>
+                        </group>
+
+                    </sheet>
+                    <footer>
+                        <button name="process_rate" string="Aplicar a factura" type="object" class="btn-primary"
+                                icon="fa-caret-right" style="background-color:#055d97" attrs="{'invisible': [('check_project','=',True)]}"
+                         confirm="Está seguro de calcular el interés para esta factura ?"/>
+                        <button string="Cerrar" class="btn-secondary" special="cancel" icon="fa-times-circle"
+                                style="background-color: #cecece"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!--        <record id="action_patent_owner_change_wizard" model="ir.actions.act_window">-->
+        <!--            <field name="name">Cambiar contribuyente</field>-->
+        <!--            <field name="res_model">patent.owner.change.wizard</field>-->
+        <!--            <field name="binding_model_id" ref="l10n_cr_municipality.model_l10n_cr_patent"/>-->
+        <!--            <field name="view_mode">form</field>-->
+        <!--            <field name="view_id" ref="patent_owner_change_wizard_form"/>-->
+        <!--            <field name="target">new</field>-->
+        <!--        </record>-->
+        <record id="patent_interes_wizard_action" model="ir.actions.act_window">
+            <field name="name">Interés moratorio</field>
+            <field name="res_model">patent.interes.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="patent_interes_wizard_form"/>
+            <field name="target">new</field>
+            <field name="context">{'default_invoice_id': active_id}</field>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+        </record>
+
+    </data>
+
+
+</odoo>

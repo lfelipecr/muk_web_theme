@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="patent_states_change_wizard_form">
+            <field name="name">patent.states.change.form</field>
+            <field name="model">patent.states.change.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div>
+                            <h2 style="color: #13b035">
+                                <span>Patente:
+                                    <field name="patent_id"/>
+                                </span>
+                            </h2>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="state_old"/>
+                                <field name="state" widget="radio"/>
+                            </group>
+                            <group>
+                                <div class="alert alert-info" role="alert" colspan="4" style="width: 92%;"
+                                     attrs="{'invisible':[('state_old', '!=', 'in_progress')]}">
+                                    <span class="fa fa-info-circle"/>
+                                   Si su estado actual es <strong>EN PROGRESO, </strong> puede <strong>CANCELAR </strong> la patente.
+                                </div>
+                                 <div class="alert alert-info" role="alert" colspan="4" style="width: 92%;"
+                                     attrs="{'invisible':[('state_old', '!=', 'approved')]}">
+                                    <span class="fa fa-info-circle"/>
+                                   Si su estado actual es <strong>APROBADA, </strong> puede: <strong> SUSPENDER O RETIRAR</strong> la patente.
+                                </div>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="motivo"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="process_update" string="Actualizar" type="object" class="btn-primary"
+                                icon="fa-refresh" style="background-color:#055d97"/>
+                        <button string="Cerrar" class="btn-secondary" special="cancel" icon="fa-times-circle"
+                                style="background-color: #cecece"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_patent_states_change_wizard" model="ir.actions.act_window">
+            <field name="name">Cambiar estado</field>
+            <field name="res_model">patent.states.change.wizard</field>
+            <field name="binding_model_id" ref="l10n_cr_municipality.model_l10n_cr_patent"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="patent_states_change_wizard_form"/>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

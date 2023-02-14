@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="report_defaulter_financial_form">
+            <field name="name">defaulter.financial.download.wizard.form</field>
+            <field name="model">defaulter.financial.download.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Descargar reporte export file">
+                    <sheet>
+                        <field name="trimestre_actual" invisible="1" style="color: #01ff00"/>
+                        <group>
+                            <div class="oe_grey" colspan="4">
+                                <field name="title" readonly="1" style="border: 0;color:#03a403;"/>
+                            </div>
+                            <!--<div class="alert alert-r" role="alert" style="margin-bottom:0px;"
+                                 colspan="4">
+                                NOTA: Las patentes generadas como morosas se toman en cuenta según el trimestre actual,
+                                por ende, todas aquellas que se han pagado antes del actual trimestre, aparecen en la lista
+                                de este reporte.
+                            </div> -->
+                            <div class="alert alert-r" role="alert" style="margin-bottom:0px;"
+                                 colspan="4">
+                                NOTA: Las patentes generadas como morosas se toman en cuenta hasta la fecha de hoy o dada una fecha,
+                                por ende, todas aquellas que se han pagado antes del actual trimestre, aparecen en la lista
+                                de este reporte.
+                            </div>
+                            <group>
+                                <field name="mode" widget="radio"/>
+                                <field name="date"   attrs="{'required': [('mode', '=', 'select')], 'invisible': [('mode', '!=', 'select')]}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="print_report" string="Imprimir" type="object" class="btn-primary"
+                                icon="fa-download" style="background-color:#055d97"/>
+                        <button string="Cerrar" class="btn-secondary" special="cancel" icon="fa-times-circle"
+                                style="background-color: #cecece"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_report_defaulter_financial_wizard" model="ir.actions.act_window">
+            <field name="name">Reporte de patentes morosas</field>
+            <field name="res_model">defaulter.financial.download.wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem
+                id="report_defaulter_financial_wizard"
+                name="Patenes morosas"
+                parent="l10n_cr_municipality_extend.menu_municipalidad_financial_reports"
+                sequence="2"
+                action="action_report_defaulter_financial_wizard"/>
+
+    </data>
+</odoo>

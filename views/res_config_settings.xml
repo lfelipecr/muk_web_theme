@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="l10n_cr_municipality.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='basic_data']" position="after">
+                <div id="basic_data_interest">
+                    <h2>Intereses</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="content-group mt16">
+                                <group>
+                                    <field name="interest_product"/>
+                                    <field name="interest_rate_ids" string="Intereses"/>
+                                </group>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="basic_manager_patent">
+                    <h2>Encargando de Patente</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="content-group mt16">
+                                <group>
+                                    <field name="patent_mail" string="Mail encargado patentes"/>
+                                </group>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+            <xpath expr="//div[@id='basic_data']" position="before">
+                <div id="basic_period">
+                    <h2>Período actual</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="content-group mt16">
+                                <group>
+                                    <field name="period" string="Período"/>
+                                </group>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

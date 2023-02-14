@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <record id="res_partner_form_muni_view" model="ir.ui.view">
+        <field name="name">res.partner.form.view.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <!--            <field name="property_payment_term_id" position="after">-->
+            <!--                <field name="payment_methods_id" groups="account.group_account_invoice"/>-->
+            <!--            </field>-->
+            <xpath expr="//group[1]" position="after">
+                <group >
+                    <group attrs="{'invisible': [('company_type','=','person')]}">
+                        <field name="representante_name" string="Representante legal" />
+                        <field name="representante_identity" string="N°Identificación"/>
+                    </group>
+
+                </group>
+
+            </xpath>
+        </field>
+    </record>
+</odoo>

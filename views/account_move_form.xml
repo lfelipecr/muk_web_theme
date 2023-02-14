@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_move_line_muni_form" model="ir.ui.view">
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_move_line_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="after">
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_move_patent_form" model="ir.ui.view">
+        <field name="name">account.move.form.inherit.patent</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <field name="payment_reference" position="after">
+                <field name="patent_id" readonly="1" string="Patente" attrs="{'invisible': [('patent_id','=',False)]}"/>
+                <field name="total_paid" invisible="1"/>
+                <field name="calulate_interes" invisible="1"/>
+            </field>
+            <field name="amount_total" position="before">
+                <field name="total_discount" readonly="1" force_save="1" style="color:#00d553"/>
+            </field>
+
+            <xpath expr="//group[@id='header_right_group']" position="inside">
+                 <label for="date_interes" string="Fecha interés"/>
+                 <div id="date_interes">
+                     <field name="date_interes" class="mb-0 oe_inline mr-2" attrs="{'required': [('patent_id','!=', False)]}"/>
+                    <span class="badge badge-info mb-0 oe_inline">Fecha hasta dónde generará el interés</span>
+                </div>
+            </xpath>
+
+            <xpath expr="//field[@name='invoice_line_ids']//form//field[@name='name']" position="after">
+                <field name="message_ids"/>
+
+            </xpath>
+             <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='name']" position="before">
+                 <field name="year" string="Período" attrs="{'invisible': [('parent.patent_id','=',False)]}" optional="show"/>
+            </xpath>
+
+
+        </field>
+    </record>
+
+    <record id="view_invoice_patent_tree" model="ir.ui.view">
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_invoice_tree"/>
+        <field name="arch" type="xml">
+            <field name="amount_total_signed" position="after">
+                <field name="total_discount" sum="Total Descuento" optional="show"/>
+                <field name="total_paid" sum="Total Pagado" optional="show"/>
+            </field>
+        </field>
+    </record>
+</odoo>

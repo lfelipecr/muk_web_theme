@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cash_financial_download.wizard,access.cash.financial.download.wizard,model_cash_financial_download_wizard,base.group_user,1,1,1,1
+access_patent_financial_download.wizard,access.patent.financial.download.wizard,model_patent_financial_download_wizard,base.group_user,1,1,1,1
+access_defaulter_financial_download.wizard,access.defaulter.financial.download.wizard,model_defaulter_financial_download_wizard,base.group_user,1,1,1,1
+access_district_financial_download.wizard,access.district.financial.download.wizard,model_district_financial_download_wizard,base.group_user,1,1,1,1
+access_l10n_cr_patent_lines,access_l10n_cr_patent_lines,model_l10n_cr_patent_lines,,1,1,1,1
+access_patent_owner_change_wizard,access.patent.owner.change.wizard,model_patent_owner_change_wizard,base.group_user,1,1,1,1
+access_patent_states_change_wizard,access.patent.states.change.wizard,model_patent_states_change_wizard,base.group_user,1,1,1,1
+access_l10n_cr_interes,l10n_cr.interes,model_l10n_cr_interes,base.group_user,1,1,1,1
+access_patent_interes_wizard,patent.interes.wizard,model_patent_interes_wizard,base.group_user,1,1,1,1
+access_l10ncr_patent_customer_report,l10ncr.patent.customer.report,model_l10ncr_patent_customer_report,base.group_user,1,1,1,1
+access_patent_customer_wizard,patent.customer.wizard,model_patent_customer_wizard,base.group_user,1,1,1,1
+access_l10n_cr_recaudacion,l10n_cr.recaudacion,model_l10n_cr_recaudacion,base.group_user,1,1,1,1
+access_patent_recaudacion_wizard,patent.recaudacion.wizard,model_patent_recaudacion_wizard,base.group_user,1,1,1,1
+access_swal_message,swal.message,model_swal_message,base.group_user,1,1,1,1

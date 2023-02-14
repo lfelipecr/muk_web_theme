@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="l10n_cr_patent_view_extend_form" model="ir.ui.view">
+        <field name="model">l10n_cr.patent</field>
+        <field name="inherit_id" ref="l10n_cr_municipality.l10n_cr_patent_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='approve']" position="replace">
+                 <button name="approve" type="object" string="Aprobar" class="oe_highlight"
+                            states="in_progress" context="{'default_patent_id': id}"/>
+            </xpath>
+            <xpath expr="//button[@name='action_view_sale']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <field name="invoices_ids" invisible="1"/>
+                <button class="oe_stat_button"
+                            type="object"
+                            name="action_view_invoices"
+                            attrs="{'invisible': [('invoice_count', '=', 0)]}"
+                            icon="fa-usd">
+                            <field name="invoice_count" widget="statinfo" string="Facturas"/>
+
+                </button>
+                <field name="patents_lines" invisible="1"/>
+                <button class="oe_stat_button"
+                            type="object"
+                            name="action_view_trimesters_paids"
+                            attrs="{'invisible': [('patents_lines', '=', [])]}"
+                            icon="fa-list-ol" string="Trimestres pagados"/>
+
+            </xpath>
+            <xpath expr="//field[@name='pay_to']" position="after">
+                <field name="period" invisible="1"/>
+                <field name="month" invisible="1"/>
+                <field name="generate_inv" invisible="1"/>
+                <field name="year" invisible="1"/>
+                <field name="is_web" invisible="1"/>
+                <field name="change_name" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='pay_to']" position="replace">
+                <label for="pay_to" string="Pagado hasta el"/>
+                <div id="pay_to">
+                    <span class="badge badge-warning mb-0 oe_inline"  attrs="{'invisible': [('month','!=',0)]}">Aún si fecha ...</span>
+                    <field name="pay_to" class="mb-0 oe_inline"/>
+                    <button name="new_invoice" string="Generar Factura" type="object" icon="fa-arrow-right"
+                            class="btn btn-link pt-0"
+                            attrs="{'invisible': ['|',('generate_inv','=',False),('state','!=','approved')]}"
+                            />
+                </div>
+            </xpath>
+
+            <xpath expr="//div[@id='pay_to']" position="after">
+                <field name="pay_next_visible" invisible="1"/>
+                <field name="pay_next" attrs="{'invisible': [('pay_next_visible','=', True)]}"/>
+                <div  class="alert alert-warning" role="alert" style="margin-bottom:0px; font-size:10px" colspan="2"
+                      attrs="{'invisible': [('pay_next_visible','=', True)]}">
+                    Al validar la última factura, generá una posible fecha de alcance de pago.
+                    Este alcance comprende el último día del trimestre a pagar.
+                </div>
+
+                <field name="pago_timbre_licor" readonly="1" style="color:#38c172"
+                        attrs="{'invisible': [('pago_timbre_licor','=','nn')]}"/>
+                <div  class="alert alert-info" role="alert" style="margin-bottom:0px;"
+                      attrs="{'invisible': [('pago_timbre_licor','in',('nn','paid'))]}"
+                    colspan="2">
+                    NOTA: Aún no se ha pagado el timbre correspondiente a patente licores de ₡5,000.00 colones.
+                </div>
+            </xpath>
+
+        </field>
+    </record>
+
+       <record id="l10n_cr_patent_view_extend_tree" model="ir.ui.view">
+            <field name="model">l10n_cr.patent</field>
+            <field name="inherit_id" ref="l10n_cr_municipality.l10n_cr_patent_view_tree"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//field[@name='pay_to']" position="replace">
+                      <field name="pay_to" string="Pagado hasta el"/>
+                 </xpath>
+            </field>
+       </record>
+</odoo>

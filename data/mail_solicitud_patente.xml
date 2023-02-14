@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data >
+        <!--TODO: EMAIL PARA SOLICITANTE-->
+        <record id="email_template_solicitud_patente_customer" model="mail.template">
+            <field name="name">Solicitud Patente</field>
+<!--            <field name="email_from">${object.company_id.patent_mail}</field>-->
+            <field name="email_from">ti@muniriocuarto.go.cr</field>
+            <field name="subject">Estimado, ${object.partner_id.name}</field>
+            <field name="email_to">${object.partner_id.email}</field>
+            <field name="model_id" ref="l10n_cr_municipality.model_l10n_cr_patent"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html" type="html">
+                <p>Hola</p>
+            </field>
+        </record>
+
+        <!--TODO: EMAIL PARA VALIDADOR DE PATENTES-->
+        <record id="email_template_solicitud_patente_user" model="mail.template">
+            <field name="name">Solicitud Patente</field>
+<!--            <field name="email_from">${object.company_id.patent_mail}</field>-->
+            <field name="email_from">ti@muniriocuarto.go.cr</field>
+            <field name="subject">NOTIFICACION SOLICITUD-PATENTES</field>
+            <field name="email_to">${object.company_id.patent_mail}</field>
+            <field name="model_id" ref="l10n_cr_municipality.model_l10n_cr_patent"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html" type="html">
+                <p>Hola</p>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+

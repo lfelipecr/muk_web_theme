@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="report_patent_recaudacion_form">
+            <field name="name">patent.recaudacion.wizard.form</field>
+            <field name="model">patent.recaudacion.wizard</field>
+            <field name="arch" type="xml">
+                <form >
+                    <sheet>
+                        <group>
+                            <div class="alert alert-info" role="alert" style="margin-bottom:0px;width:100%">
+                                <bold>
+                                    Nota:
+                                </bold>
+                                Se generará el reporte de recaudación del trimestre 1 al 4.
+                            </div>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="view_list" string="Ver" type="object" class="btn-primary"
+                                icon="fa-list" style="background-color:#055d97"/>
+                        <button string="Cerrar" class="btn-secondary" special="cancel" icon="fa-times-circle"
+                                style="background-color: #cecece"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_report_patent_recaudacion_wizard" model="ir.actions.act_window">
+            <field name="name">Reporte de Recaudación</field>
+            <field name="res_model">patent.recaudacion.wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+         <menuitem
+            id="report_recaudacion_municipalidad"
+            name="Reporte de Recaudación"
+            parent="l10n_cr_municipality_extend.menu_municipalidad_financial_reports"
+            sequence="10"
+            action="action_report_patent_recaudacion_wizard"/>
+
+    </data>
+</odoo>

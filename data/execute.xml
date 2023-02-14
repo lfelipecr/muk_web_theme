@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="False">
+<!--    <function model="l10n_cr.patent.lines" name="_assign_year"/>-->
+    <function model="account.move.line" name="_assign_year"/>
+    <function model="l10n_cr.patent" name="_get_topaid"/>
+    <!--    <function model="l10n_cr.patent" name="_create_patent_lines"/>-->
+    <!--    <function model="account.move" name="compute_amount_extra"/>-->
+</odoo>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+     <record id="product_intereses" model="product.product">
+        <field name="name">Intereses</field>
+        <field name="sale_ok">True</field>
+        <field name="purchase_ok">False</field>
+        <field name="type">service</field>
+        <field name="invoice_policy">order</field>
+    </record>
+
+</odoo>

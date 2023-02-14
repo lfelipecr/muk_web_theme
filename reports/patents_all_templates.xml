@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_patent_financial">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <style>
+                    .ancho_uno {
+                    width: 10%,
+                    text-align: center
+                    }
+                    .ancho_dos {
+                    width: 73%
+                    }
+                    .ancho_tres {
+                    width: 17%
+                    }
+
+                </style>
+                <t t-foreach="data['pages']" t-as="d">
+                    <div class="page" style="margin-top: -45px !important;">
+                        <h2 class="text-center">
+                            <span>Reporte de Patentes</span>
+                        </h2>
+                        <div class="row">
+                            <div class="col-5">
+                                <h6>
+                                    <span>Usuario :</span>
+                                    <t t-esc="data['usuario']"/>
+                                </h6>
+                            </div>
+                            <div class="col-4">
+                               <h6>
+                                    <span>Datos :
+                                        <t t-esc="data['fechas']"/>
+                                    </span>
+                                </h6>
+                            </div>
+                            <div class="col-3">
+                               <h6>
+                                    <span>Fecha :</span>
+                                    <t t-esc="data['fecha_hoy']"/>
+                                </h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5">
+                               <h6>
+                                    <span>Actividad :
+                                        <t t-esc="data['actividad']"/>
+                                    </span>
+                                </h6>
+                            </div>
+                            <div class="col-4">
+                                <h6>
+                                    <span>Distrito :</span>
+                                    <t t-esc="data['distrito']"/>
+                                </h6>
+                            </div>
+                            <div class="col-3">
+                               <h6>
+                                    <span>Régimen :</span>
+                                    <t t-esc="data['regimen']"/>
+                                </h6>
+                            </div>
+                        </div>
+                        <tbody>
+                            <hr/>
+                             <table class="table table-sm table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th colspan="7" class="text-center">
+                                            <strong>Listado de Pantentes aprobadas.</strong>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th>Número</th>
+                                        <th>Patentado</th>
+                                        <th>Negocio</th>
+                                        <th>Regimen</th>
+                                        <th>Distrito</th>
+                                        <th class="text-right">Pago trim.</th>
+                                        <th class="text-right">Pago anual</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="data['datas']" t-as="data">
+                                        <tr>
+                                            <td><span t-esc="data['numero']"/></td>
+                                            <td><span t-esc="data['patentado']"/></td>
+                                            <td><span t-esc="data['negocio']"/></td>
+                                            <td><span t-esc="data['regimen']"/></td>
+                                            <td><span t-esc="data['distrito']"/></td>
+                                            <td class="text-right">₡ <span t-esc="'{0:,.2f}'.format(round(data['trimestre_payment'],2))"/></td>
+                                            <td class="text-right">₡ <span t-esc="'{0:,.2f}'.format(round(data['yearly_payment'],2))"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+<!--                                <tfoot>-->
+<!--                                    <tr>-->
+<!--                                        <td colspan="2" class="text-center">-->
+<!--                                            <span>Total:</span>-->
+<!--                                        </td>-->
+<!--                                        <td class="text-right">-->
+<!--                                            <strong>₡-->
+<!--                                                <t t-esc="'{0:,.2f}'.format(total_tipo_patentes)"/>-->
+<!--                                            </strong>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                </tfoot>-->
+                            </table>
+
+                        </tbody>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

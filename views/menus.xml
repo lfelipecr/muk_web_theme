@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem id="menu_municipalidad_financial_reports" name="Reportes" parent="l10n_cr_municipality.main_municipality_menu" sequence="8"/>
+</odoo>

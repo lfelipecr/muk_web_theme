@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="patentes_pendientes" name="PatentesPendientes">
+        <t t-call="website.layout">
+            <t t-set="pageName" t-value="'patentes_pendientes_page'"/>
+            <div id="wrap" class="oe_structure oe_empty">
+                <div class="row mt-1">
+                    <div class="col-md-8" style="height: 500px">
+                        <div class="row">
+                            <div class="col-md-3"/>
+                            <div class="col-md-6">
+                                <img alt="Logo de muni" class="d-block mx-auto img img-fluid" src="/l10n_cr_municipality_extend/static/src/images/muni.png"/>
+                                <br/>
+                                <p style="font-size: medium ; font-weight: bold" class="text-center">CONSULTA PATENTE PENDIENTE</p>
+                            </div>
+                            <div class="col-md-3"/>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2"/>
+                            <div class="col-md-3">
+                                <strong>BÚSQUEDA POR:</strong>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="option_cedula" value="option1" checked=""/>
+                                    <label class="form-check-label" for="inlineRadio1">Número de cédula</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="option_patente" value="option2"/>
+                                    <label class="form-check-label" for="inlineRadio2">Número de patente</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2"/>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <hr/>
+                            </div>
+                        </div>
+                        <div class="row" id="div_cedula">
+                            <div class="col-md-2"/>
+                            <div class="col-md-8">
+                                <div class="form-group row">
+                                    <label for="staticEmail" class="col-sm-5 col-form-label">INGRESE NÚMERO DE CÉDULA</label>
+                                    <div class="col-sm-7">
+                                        <input class="form-control text-center" type="text" id="txt_cedula" name="txt_cedula"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2"/>
+                        </div>
+                        <div class="row" id="div_patente" style="display:none">
+                            <div class="col-md-2"/>
+                            <div class="col-md-8">
+                                <div class="form-group row">
+                                    <label for="staticEmail" class="col-sm-5 col-form-label">INGRESE NÚMERO DE PATENTE</label>
+                                    <div class="col-sm-7">
+                                        <input class="form-control text-center" type="text" id="txt_patente" name="txt_patente"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2"/>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="text-center col-md-12 col-lg-12 suggestionsSubmitParent">
+                                    <input type="button" name="btnConsultar" value="CONSULTAR" id="btnConsultar" class=" btn btn-md d-print-none" style="color:White;background-color:#003366;font-weight:bold;"/>
+                                    <input type="button" name="btnRefresh" value="REFRESCAR" id="btnRefresh" class="btn btn-success d-print-none" style="color:White;background-color:#003366;font-weight:bold;text-align: center"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="div_table" style="display:none">
+                            <div class="col-md-1"/>
+                            <div class="col-md-10">
+                                <table id="table_data" class="table table-striped" style="font-size: 13px;">
+                                    <thead>
+                                        <tr style="background: #003366;color: white;">
+                                            <th>PERSONA</th>
+                                            <th>PAGADO HASTA</th>
+                                            <th class="text-right">SALDO</th>
+                                            <th>INTERÉS HASTA</th>
+                                            <th class="text-right">SALDO INTERÉS</th>
+                                            <th class="text-right">SALDO TOTAL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-1"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="font-size:13.5px">
+                        <br/>
+                        <table class="table" style="background: ivory">
+                            <thead>
+                                <tr>
+                                    <th scope="col" colspan="4" style="font-size:13px">
+                                        Si desea cancelar su pendiente puede hacerlo a las siguientes
+                                        cuentas bancarias:
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row" colspan="2">Cédula jurídica:</th>
+                                    <td colspan="2">3 014 795871</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" colspan="4" style="color: lightseagreen">
+                                        BANCO DE COSTA RICA
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th scope="row" colspan="2">Cuenta Cliente</th>
+                                    <td colspan="2">001-04892801</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" colspan="2">Cuenta IBAN</th>
+                                    <td colspan="2">CR47015201001048928010</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" colspan="4" style="color: lightseagreen">
+                                        BANCO NACIONAL
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th scope="row" colspan="2">Cuenta Cliente</th>
+                                    <td colspan="2">100-1-66-171-1</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" colspan="2">Cuenta IBAN</th>
+                                    <td colspan="2">CR50015106610010001711</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th scope="col" colspan="4">
+                                        Reporte su pago aquí:
+                                        <u>
+                                            <a href="https://forms.zohopublic.com/bigcloudusa/form/ReportedeDepositivo/formperma/fi9cOiqgkWt2M0l2S7TE4km7lFxDddx3oPbn8pL7Fko"
+                                               style="color: red">REPORTAR PAGO
+                                            </a>
+                                        </u>
+
+                                    </th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

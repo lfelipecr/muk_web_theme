@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="paperformat_financial_vertical_reports" model="report.paperformat">
+        <field name="name">Reporte financiero tipo carta vertical</field>
+        <field name="default" eval="True"/>
+        <field name="format">Letter</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">38</field>
+        <field name="margin_bottom">26</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">30</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="paperformat_financial_horizontal_reports" model="report.paperformat">
+        <field name="name">Reporte financiero tipo carta horizontal</field>
+        <field name="default" eval="True"/>
+        <field name="format">Letter</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">38</field>
+        <field name="margin_bottom">26</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">30</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="action_print_cash_payment" model="ir.actions.report">
+        <field name="name">Reporte de Caja</field>
+        <field name="model">cash.financial.download.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">l10n_cr_municipality_extend.report_cash_financial</field>
+        <field name="report_file">l10n_cr_municipality_extend.report_cash_financial</field>
+        <field name="paperformat_id" ref="paperformat_financial_vertical_reports"/>
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="action_print_patent_payment" model="ir.actions.report">
+        <field name="name">Reporte de Patentes</field>
+        <field name="model">patent.financial.download.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">l10n_cr_municipality_extend.report_patent_financial</field>
+        <field name="report_file">l10n_cr_municipality_extend.report_patent_financial</field>
+        <field name="paperformat_id" ref="paperformat_financial_horizontal_reports"/>
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="action_print_patent_defaulter_payment" model="ir.actions.report">
+        <field name="name">Reporte de Patentes Morosas</field>
+        <field name="model">defaulter.financial.download.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">l10n_cr_municipality_extend.report_defaulter_financial</field>
+        <field name="report_file">l10n_cr_municipality_extend.report_defaulter_financial</field>
+        <field name="paperformat_id" ref="paperformat_financial_horizontal_reports"/>
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="action_print_patent_district_payment" model="ir.actions.report">
+        <field name="name">Reporte de Patentes por distritos</field>
+        <field name="model">district.financial.download.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">l10n_cr_municipality_extend.report_district_financial</field>
+        <field name="report_file">l10n_cr_municipality_extend.report_district_financial</field>
+        <field name="paperformat_id" ref="paperformat_financial_horizontal_reports"/>
+        <field name="binding_model_id" eval="False"/>
+        <field name="binding_type">report</field>
+    </record>
+
+<!--     <record id="action_print_cash_payment" model="ir.actions.report">-->
+<!--        <field name="paperformat_id" ref="paperformat_financial_reports"/>-->
+<!--        <field name="binding_model_id" eval="False"/>-->
+<!--    </record>-->
+</odoo>

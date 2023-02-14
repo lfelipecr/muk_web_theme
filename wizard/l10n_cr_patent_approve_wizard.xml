@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="l10n_cr_patent_approve_wizard_view_extend_form" model="ir.ui.view">
+        <field name="model">l10n_cr.patent.approve_wizard</field>
+        <field name="inherit_id" ref="l10n_cr_municipality.l10n_cr_patent_approve_wizard_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='trimester']" position="after">
+                <field name="year_paid" string="Período/Año"/>
+            </xpath>
+            <xpath expr="//field[@name='patent_id']" position="after">
+                <field name="trimestre_now" invisible="1" />
+                <field name="trimestre_selected" invisible="1"/>
+                <field name="trimester_paid" invisible="1"/>
+            </xpath>
+            <xpath expr="//footer[1]" position="before">
+                 <group name="message_aviso" >
+                     <field name="active_mensaje" invisible="1"/>
+                     <div  class="alert alert-danger" role="alert" style="margin-bottom:0px;" attrs="{'invisible': [('active_mensaje','=',0)]}"
+                     colspan="4">
+                        NOTA: No puede generar un comprobante con un trimestre menor al último generado o al actual.
+                      </div>
+                 </group>
+             </xpath>
+
+            <xpath expr="//button[@name='approve']" position="replace">
+                <button name="approve" type="object" string="Aprobar" class="oe_highlight"
+                        attrs="{'invisible': [('active_mensaje','=',1)]}"/>
+            </xpath>
+            <xpath expr="//group[@name='message_trimester']" position="replace">
+                <group name="message_trimester" >
+                    <strong><i class="fa fa-info-circle text-info"/><span style="color:#39ff9b"> Información: </span></strong>
+                    <br/>
+                    <div class="oe_grey" colspan="4">
+                        <field name="show_mensaje" readonly="1" style="border: 0;"/>
+                    </div>
+                </group>
+            </xpath>
+             <xpath expr="//field[@name='apply_discount']" position="replace">
+                 <field name="apply_discount" attrs="{'invisible':[('trimestre_now', '>', 1)]}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

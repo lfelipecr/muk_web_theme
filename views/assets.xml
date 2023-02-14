@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+        <template id="assets_frontend" inherit_id="website.assets_frontend">
+            <xpath expr="//script[@src='/website/static/src/js/user_custom_javascript.js']" position="after">
+<!--                <script type="text/javascript" src="/l10n_cr_municipality_extend/static/src/js/jquery-3.5.1.min.js" />-->
+                <script type="text/javascript" src="/l10n_cr_municipality_extend/static/src/js/swal.min.js" />
+                <script type="text/javascript" src="/l10n_cr_municipality_extend/static/src/js/script.js" />
+                <script type="text/javascript" src="/l10n_cr_municipality_extend/static/src/js/w.js" />
+                <script type="text/javascript" src="/l10n_cr_municipality_extend/static/src/js/wizard.js" />
+            </xpath>
+        </template>
+
+         <template id="muni_assets_frontend" inherit_id="web.assets_frontend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/l10n_cr_municipality_extend/static/src/css/loading.css"/>
+                <link rel="stylesheet" href="/l10n_cr_municipality_extend/static/src/css/wizard.css"/>
+                <link rel="stylesheet" href="/l10n_cr_municipality_extend/static/src/css/bootstrap-glyphicons.css"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>

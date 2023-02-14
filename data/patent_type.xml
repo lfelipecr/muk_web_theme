@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+     <record id="sequence_patent_type_other" model="ir.sequence">
+        <field name="name">nn</field>
+        <field name="code">NN</field>
+        <field name="padding">4</field>
+    </record>
+
+    <record id="patent_type_other" model="l10n_cr.patent.type">
+        <field name="name">NO DEFINIDIDO</field>
+        <field name="code">NN</field>
+        <field name="sequence_id" eval="ref('l10n_cr_municipality_extend.sequence_patent_type_other')"/>
+        <field name="product_id" eval="ref('l10n_cr_municipality.product_patent')"/>
+        <field name="product_advance_id" eval="ref('l10n_cr_municipality.product_patent_advance')"/>
+    </record>
+</odoo>
+
+

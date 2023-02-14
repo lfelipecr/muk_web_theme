@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_defaulter_financial">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <style>
+                    .ancho_uno {
+                    width: 10%,
+                    text-align: center
+                    }
+                    .ancho_dos {
+                    width: 73%
+                    }
+                    .ancho_tres {
+                    width: 17%
+                    }
+
+                </style>
+                <t t-foreach="data['pages']" t-as="d">
+                    <div class="page" style="margin-top: -45px !important;">
+                        <h2 class="text-center">
+                            <span>Reporte de Patentes Morosas</span>
+                        </h2>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6>
+                                    <span>Usuario :</span>
+                                    <t t-esc="data['usuario']"/>
+                                </h6>
+                                <h6>
+                                    <span>Información :
+                                        <t t-esc="data['title']"/>
+                                    </span>
+                                </h6>
+                            </div>
+                            <div class="col-4">
+                                <h6>
+                                    <span>Fecha :</span>
+                                    <t t-esc="data['fecha_hoy']"/>
+                                </h6>
+                            </div>
+                        </div>
+                        <tbody>
+                            <hr/>
+                            <table class="table table-sm table-bordered">
+                                <thead>
+                                    <!--                                    <tr>-->
+                                    <!--                                        <th colspan="9" class="text-center">-->
+                                    <!--                                            <strong>Listado de Pantentes Morosas.</strong>-->
+                                    <!--                                        </th>-->
+                                    <!--                                    </tr>-->
+                                    <tr>
+                                        <th style="width: 9%">Número</th>
+                                        <th>Patentado</th>
+                                        <th>Teléfono/Email</th>
+                                        <th>Negocio</th>
+                                        <th>Distrito</th>
+                                        <th style="width: 11%">Fecha solicitud</th>
+                                        <th style="width: 10%">Último pago</th>
+                                        <th class="text-right" style="width: 12%">Pago trim.</th>
+                                    </tr>
+                                </thead>
+                                <t t-set="total_adeudado" t-value="0"/>
+                                <tbody>
+                                    <t t-foreach="data['datas']" t-as="data">
+                                        <tr>
+                                            <td>
+                                                <span t-esc="data['numero']"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="data['patentado']"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="data['telefono']"/>
+                                                <br/>
+                                                <span t-esc="data['email']"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="data['negocio']"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="data['distrito']"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="data['fecha_solicitud']"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="data['pay_to']"/>
+                                            </td>
+                                            <td class="text-right">₡
+                                                <span t-esc="'{0:,.2f}'.format(round(data['pago_trimestral'],2))"/>
+                                            </td>
+                                            <t t-set="total_adeudado" t-value="total_adeudado + round(data['pago_trimestral'],2)"/>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </tbody>
+                        <table class="table table-sm table-bordered">
+                            <tfoot>
+                                <tr>
+                                    <td colspan="7" class="text-center">
+                                        <span>TOTAL :</span>
+                                    </td>
+                                    <td class="text-right">
+                                        <strong>₡
+                                            <t t-esc="'{0:,.2f}'.format(round(total_adeudado,2))"/>
+                                        </strong>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

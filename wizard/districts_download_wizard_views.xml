@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="report_district_financial_form">
+            <field name="name">district.financial.download.wizard.form</field>
+            <field name="model">district.financial.download.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Descargar reporte export file">
+                    <sheet>
+                        <group>
+                            <div class="alert alert-info" role="alert" attrs="{'invisible':[('mode', '!=', 'range')]}"
+                                 colspan="4">
+                                <span class="fa fa-info-circle"/>
+                                Le permitirá emitir un reporte de patentes con un rango de fechas dadas. De ser
+                                así, podrá obtener datos por años, meses, semanas, días.
+                            </div>
+                            <div class="alert alert-info" role="alert" attrs="{'invisible':[('mode', '!=', 'all')]}"
+                                 colspan="4">
+                                <span class="fa fa-info-circle"/>
+                                Le permitirá emitir un reporte de patentes con todos los datos, hasta la fecha.
+                            </div>
+                            <group>
+                                <field name="mode" widget="radio"/>
+                            </group>
+
+                            <group col="3">
+                                <label for="date_from" string="Desde - Hasta"
+                                       attrs="{'invisible': [('mode', '!=', 'range')]}"/>
+                                <div attrs="{'invisible': [('mode', '!=', 'range')]}">
+                                    <div class="o_row">
+                                        <field
+                                                name="date_from"
+                                                class="oe_inline" style="background-color: #e3e3e3"
+                                                attrs="{'required': [('mode', '=', 'range')], 'invisible': [('mode', '!=', 'range')]}"
+                                                options="{'no_create': True}"
+                                        />
+                                        <span class="oe_inline">
+                                            <b>-</b>
+                                        </span>
+                                        <field
+                                                name="date_to"
+                                                class="oe_inline" style="background-color: #e3e3e3"
+                                                attrs="{'required': [('mode', '=', 'range')], 'invisible': [('mode', '!=', 'range')]}"
+                                                options="{'no_create': True}"
+                                        />
+                                    </div>
+                                </div>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="tipo_distrito" widget="radio"/>
+                            </group>
+                            <group>
+                                <field name="company_id" invisible="1"/>
+                                <field name="county_id" invisible="1"/>
+                                <field name="district_ids" widget="many2many_tags"  options="{'no_open': True}" domain="[('county_id', '=', county_id)]"
+                                       context="{'county_id': county_id}"
+                                       attrs="{'required': [('tipo_distrito', '=', 'selected')], 'invisible': [('tipo_distrito', '!=', 'selected')]}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="print_report" string="Imprimir" type="object" class="btn-primary"
+                                icon="fa-download" style="background-color:#055d97"/>
+                        <button string="Cerrar" class="btn-secondary" special="cancel" icon="fa-times-circle"
+                                style="background-color: #cecece"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_report_district_financial_wizard" model="ir.actions.act_window">
+            <field name="name">Reporte de Pantentes por Distrito</field>
+            <field name="res_model">district.financial.download.wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem
+                id="report_district_financial_wizard"
+                name="Patentes por Distrito"
+                parent="l10n_cr_municipality_extend.menu_municipalidad_financial_reports"
+                sequence="3"
+                action="action_report_district_financial_wizard"/>
+
+    </data>
+</odoo>

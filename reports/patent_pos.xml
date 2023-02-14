@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="l10n_cr_municipality.patent_certificate_pos" model="ir.actions.report">
+        <field name="report_name">l10n_cr_municipality_extend.patent_pos_document_extend</field>
+        <field name="report_file">l10n_cr_municipality_extend.patent_pos_document_extend</field>
+    </record>
+
+    <template id="patent_pos_document_extend">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.basic_layout">
+<!--                    <div class="page" style="font-size: 12px;">-->
+                    <div class="page">
+                        <table style="width: 100%;">
+                            <head >
+                                <tr style="font-size: 20px;text-align:center">
+                                    <th><strong>
+                                           <span t-field="o.patent_id.company_id"/>
+                                        </strong>
+                                    </th>
+                                </tr>
+                                <tr style="font-size: 14px;text-align:center">
+                                    <th>
+                                        Cédula Jurica:
+                                        <span t-field="o.patent_id.company_id.vat"/>
+                                    </th>
+                                </tr>
+                            </head>
+                        </table>
+                        <hr style="width:37%;text-align:left;margin-left:0;border-top: 1px dashed; color:#ececec" />
+                        <div id="main_data">
+                            <div style="font-size: 14px">
+                                <span t-field="o.name"/>
+                            </div>
+                            <div style="font-size: 14px">
+                                Cedula-
+                                <span t-field="o.patent_id.partner_id.vat"/>
+                            </div>
+
+                            <div style="font-size: 14px">
+                                <span t-esc="str(o.patent_id.partner_id.name).title()"/>
+                            </div>
+                        </div>
+                        <div id="land" style="font-size: 13px">
+                            <div>
+                                <span t-esc="str(o.patent_id.address).title()"/>
+                            </div>
+                        </div>
+                        <div id="secondary_data" >
+                            <div style="font-size: 13px">
+                                <span t-field="o.patent_id.create_date"/>
+                            </div>
+                            <div style="font-size: 14px">
+                                <t t-if="o.user_paid.name">
+                                    <span t-field="o.user_paid.name"/>
+                                </t>
+                                <t t-else="">
+                                    <span>No pagado aún</span>
+                                </t>
+
+<!--                                <span t-esc="str(o.payment_id.create_uid.name).title()"/>-->
+                            </div>
+                        </div>
+
+                        <hr style="width:100%;text-align:left;margin-left:0;border-top: 1px dashed; color:#ececec" />
+
+                        <table style="width: 100%;font-size: 13px" class="table table-sm o_main_table">
+                            <thead>
+                                <tr>
+                                    <th>Concepto</th>
+                                    <th class="text-right">Subtotal</th>
+                                </tr>
+                            </thead>
+                             <tbody class="invoice_tbody">
+                                <tr t-foreach="o.invoice_line_ids" t-as="line">
+                                    <td>
+                                        <span t-field="line.name"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-field="line.price_subtotal"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr style="width:100%;text-align:left;margin-left:0;border-top: 1px dashed; color:#ececec" />
+                        <table style="width: 100%;font-size: 13px" >
+                            <tfoot>
+
+                                <!--TOTAL NETO-->
+                                <t t-set="total_neto" t-value="0"/>
+                                <t t-foreach="o.invoice_line_ids" t-as="line">
+                                    <t t-if="line.discount>0">
+                                        <t t-set="total_neto" t-value="total_neto + line.price_unit"/>
+                                    </t>
+
+                                </t>
+                                <tr>
+                                    <th>Neto </th>
+                                    <td class="text-right">
+                                        <t t-if="total_neto==0">
+                                        <span t-field="o.amount_untaxed"/>
+                                    </t>
+                                    <t t-else="">
+                                        <span>₡ </span><span t-esc="round(total_neto,2)" />
+                                    </t>
+                                    </td>
+                                </tr>
+
+                                 <!--TOTAL DESCUENTO-->
+                                <t t-set="total_discount" t-value="0"/>
+                                <t t-foreach="o.invoice_line_ids" t-as="line">
+                                    <t t-if="line.discount>0">
+                                        <t t-set="total_discount" t-value="total_discount + (line.price_unit*(line.discount/100))"/>
+                                    </t>
+
+                                </t>
+                                <tr>
+                                    <th>Descuento (-) </th>
+                                    <td class="text-right">
+                                        <t t-if="total_discount==0">
+                                           <span>₡ 0.00</span>
+                                        </t>
+                                        <t t-else="">
+                                            <span>₡ </span><span t-esc="round(total_discount,2)" />
+                                        </t>
+
+                                    </td>
+                                </tr>
+
+                                 <!--SUB TOTLES-->
+                                <tr class="border-black o_subtotal" >
+                                    <th>Sub Total </th>
+                                    <td class="text-right">
+                                        <span t-field="o.amount_untaxed"/>
+                                    </td>
+                                </tr>
+                                <tr >
+                                    <th>Intereses </th>
+                                    <td class="text-right">
+                                        ₡ 0.00
+                                    </td>
+                                </tr>
+
+                                <!--**** TOTAL ****-->
+                                <tr class="border-black o_total">
+                                    <th>Total</th>
+                                    <td class="text-right">
+                                        <strong><span class="text-nowrap" t-field="o.amount_total"/></strong>
+                                    </td>
+                                </tr>
+                                 <tr>
+                                    <th>Pagado</th>
+                                    <td class="text-right">
+                                        <span t-esc="round(o.amount_total - o.amount_residual,2)" />
+                                    </td>
+                                </tr>
+                                 <tr>
+                                    <th>Saldo</th>
+                                    <td class="text-right">
+                                        <span t-field="o.amount_residual"/>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

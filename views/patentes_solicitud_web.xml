@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="solicitud_patentes" name="PatentesSolicitud">
+            <t t-call="website.layout">
+                <t t-set="pageName" t-value="'patentes_solicitud_page'"/>
+                <div id="wrap" class="oe_structure oe_empty">
+                    <div class="row">
+                        <div class="loading js_loader">
+                            <div class="loadingio-spinner-ripple-sgal4333f3i">
+                                <div class="ldio-gjb3l0k0i2j">
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <main class="container-fluid pt-5">
+                            <div class="col-md-12 mb-5 text-center">
+                                <h6 style="color: #a4a4a4">Solicitud de Patentes</h6>
+                            </div>
+                            <section class="wizard">
+                                <aside class="wizard-nav">
+                                    <div class="wizard-step" data-type="form">
+                                        <span class="dot"></span>
+                                        <span style="font-size: 20px; color: #31dcd4">Datos del Solicitante</span>
+                                    </div>
+                                    <div class="wizard-step" data-type="form">
+                                        <span class="dot"></span>
+                                        <span style="font-size: 20px; color: #31dcd4">Uso Patente</span>
+                                    </div>
+                                    <div class="wizard-step" data-type="form">
+                                        <span class="dot"></span>
+                                        <span style="font-size: 20px; color: #31dcd4">Local Comercial</span>
+                                    </div>
+                                </aside>
+
+                                <aside class="wizard-content container">
+                                    <div class="wizard-step">
+                                        <form style="width: 80%;" role="form" enctype="multipart/form-data" accept-charset="UTF-8" id="form_data">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <p>
+                                                        <i class="fa fa-info-circle"/>
+                                                        <span style="color: blue">Los requisitos para la Solicitud de Patentes, pueden ser
+                                                            descargados en el siguiente enlace:
+                                                        </span>
+                                                        <a type="button" class="btn btn-info" target="_blank"
+                                                           href="https://muniriocuarto-my.sharepoint.com/:b:/g/personal/ti_muniriocuarto_go_cr1/EdxzRuTagbJApUKFM03-zdwBsvq0obYF1ydQoRYLbqR8Wg?e=FLYFfz">
+                                                            Descargar Requisitos
+                                                        </a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <label for="combo_tipo_persona">Tipo de Persona</label>
+                                                    <select id="combo_tipo_persona" class="form-control">
+                                                        <option selected="selected" value="">--Seleccione--</option>
+                                                        <option value="#pf">Persona Física</option>
+                                                        <option value="#pj">Persona Jurídica</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-row" id="div_juridica" style="display:none">
+                                                <div class="form-group col-md-6">
+                                                    <label for="m_cedula_juridica">Cédula Jurídica</label>
+                                                    <input type="text" class="form-control" id="m_cedula_juridica"/>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="m_nombre_persona_juridica">Nombre Persona Jurídica</label>
+                                                    <input type="text" class="form-control" id="m_nombre_persona_juridica"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="m_nombres">Nombres</label>
+                                                    <input type="text" class="form-control" id="m_nombres" required=""/>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="m_apellidos">Apellidos</label>
+                                                    <input type="text" class="form-control" id="m_apellidos" required=""/>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="m_tipo_identificacion">Tipo de Identificación</label>
+                                                    <select id="m_tipo_identificacion" class="form-control">
+                                                        <option value="">-- Seleccione --</option>
+                                                        <t t-foreach="identificacion or []" t-as="ide">
+                                                            <option t-att-value="ide.id">
+                                                                <t t-esc="ide.name"/>
+                                                            </option>
+                                                        </t>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="m_identificacion">Identificación</label>
+                                                    <input type="text" class="form-control " id="m_identificacion" required=""/>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <label for="files">Adjunte los requisitos para la solicitud de patentes.</label>
+                                                    <input type="file" class="form-control-file" id="files" name="files" multiple="true"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-8">
+                                                    <label for="m_direccion">Dirección del solicitante</label>
+                                                    <input type="text" class="form-control" id="m_direccion"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="m_provincia">Provincia</label>
+                                                    <select id="m_provincia" class="form-control">
+                                                        <option value="">-- Seleccione --</option>
+                                                        <t t-foreach="provincias or []" t-as="provincia">
+                                                            <option t-att-value="provincia.id">
+                                                                <t t-esc="provincia.name"/>
+                                                            </option>
+                                                        </t>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="m_canton">Cantón</label>
+                                                    <select id="m_canton" class="form-control">
+                                                        <option value="">-- Seleccione --</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="m_distrito">Distrito</label>
+                                                    <select id="m_distrito" class="form-control">
+                                                        <option value="">-- Seleccione --</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="m_telefono">Teléfono</label>
+                                                    <input type="text" class="form-control" id="m_telefono"/>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="m_celular">Celular</label>
+                                                    <input type="text" class="form-control" id="m_celular"/>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="m_mail">Correo electrónico</label>
+                                                    <input type="text" class="form-control" id="m_mail"/>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <div class="wizard-step">
+                                        <form>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <label for="m_uso_patente">Uso de Patente</label>
+                                                    <select id="m_uso_patente" class="form-control">
+                                                        <option selected="seleceted">--Seleccione--</option>
+                                                        <option value="uso_trans">Transporte</option>
+                                                        <option value="uso_comer">Comercial</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="m_nombre_fantasia">Nombre de Fantasía</label>
+                                                    <input type="text" class="form-control" id="m_nombre_fantasia"/>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="m_actividad_comercial">Actividad Comercial</label>
+                                                    <input type="text" class="form-control" id="m_actividad_comercial"/>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6 form-check">
+                                                    <input type="checkbox" class="form-check-input ml-1 mt-2" id="check_uso_suelo"/>
+                                                    <label class="form-check-label ml-4" for="check_uso_suelo">Cuenta con Uso de Suelo</label>
+                                                </div>
+                                                <div class="form-group col-md-6" id="div_uso_suelo" style="display:none">
+                                                    <label for="m_uso_suelo">Uso de Suelo</label>
+                                                    <input type="text" class="form-control" id="m_uso_suelo" placeholder="Ingrese el número de uso de suelo"/>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="wizard-step">
+                                        <form>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="m_distrito_local">Distrito</label>
+                                                    <select id="m_distrito_local" class="form-control">
+                                                        <option value="">-- Seleccione --</option>
+                                                        <t t-foreach="distritos or []" t-as="distrito">
+                                                            <option t-att-value="distrito.id">
+                                                                <t t-esc="distrito.name"/>
+                                                            </option>
+                                                        </t>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="m_direccion_local">Dirección exacta del local</label>
+                                                    <input type="text" class="form-control" id="m_direccion_local"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="m_area_local">Área</label>
+                                                    <input type="text" class="form-control" id="m_area_local" required=""/>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="m_dimensiones_local">Dimensiones</label>
+                                                    <input type="text" class="form-control" id="m_dimensiones_local"/>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </aside>
+                            </section>
+
+                        </main>
+                    </div>
+
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>
